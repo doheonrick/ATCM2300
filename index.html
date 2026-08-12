@@ -1,0 +1,983 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>McLuhan's Tetrad and the Limits of Technological Optimism in The Wild Robot</title>
+<meta name="description" content="A tetrad reading of The Wild Robot (Sanders, 2024) — enhancement, retrieval, and the reversal the film leaves unanswered.">
+
+<!-- ===== 폰트: Syne(제목) / Newsreader(본문 세리프) / JetBrains Mono(라벨) ===== -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;1,6..72,300;1,6..72,400&family=Syne:wght@600;700;800&display=swap" rel="stylesheet">
+
+<style>
+/* =========================================================
+   1. 디자인 토큰 (색, 폰트, 간격을 변수로 한 곳에 모아둠)
+   ========================================================= */
+:root{
+  --paper:   #E7E8E2;   /* 바탕 - 풍화된 폴리머 회색 */
+  --paper-2: #DCDED6;   /* 살짝 어두운 바탕 */
+  --ink:     #15191A;   /* 본문 검정 */
+  --steel:   #5C666A;   /* 보조 텍스트 - 기계적 회청색 */
+  --pine:    #16241F;   /* 반전 섹션 배경 - 깊은 숲 */
+  --amber:   #E0A32B;   /* 강조 - 경고등 앰버 */
+  --line:    #B9BDB4;   /* 얇은 선 */
+
+  --display: 'Syne', sans-serif;
+  --body:    'Newsreader', Georgia, serif;
+  --mono:    'JetBrains Mono', monospace;
+
+  --pad: clamp(1.5rem, 5vw, 5rem);
+}
+
+/* =========================================================
+   2. 기본 리셋 & 타이포그래피
+   ========================================================= */
+*, *::before, *::after{ box-sizing: border-box; }
+
+html{ scroll-behavior: smooth; }
+
+body{
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--body);
+  font-size: clamp(1.05rem, 0.95rem + 0.35vw, 1.25rem);
+  line-height: 1.65;
+  font-weight: 300;
+  -webkit-font-smoothing: antialiased;
+}
+
+p{ margin: 0 0 1.2em; max-width: 62ch; }
+
+/* 섹션 공통 */
+.section{
+  padding: clamp(5rem, 11vh, 9rem) var(--pad);
+  border-top: 1px solid var(--line);
+  position: relative;
+}
+
+.wrap{ max-width: 1120px; margin: 0 auto; }
+
+/* 눈썹 라벨 (섹션 번호 + 테트라드 사분면) */
+.eyebrow{
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--steel);
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  margin-bottom: 2rem;
+}
+.eyebrow::after{
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: var(--line);
+}
+.eyebrow .tag{
+  color: var(--ink);
+  border: 1px solid var(--line);
+  padding: 0.2em 0.6em;
+}
+
+/* 섹션 제목 */
+.h2{
+  font-family: var(--display);
+  font-weight: 800;
+  font-size: clamp(1.9rem, 1.2rem + 2.6vw, 3.4rem);
+  line-height: 1.02;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+  margin: 0 0 1.6rem;
+  max-width: 20ch;
+}
+.h2 em{
+  font-family: var(--body);
+  font-style: italic;
+  font-weight: 300;
+  text-transform: none;
+  letter-spacing: 0;
+}
+
+/* =========================================================
+   3. HERO
+   ========================================================= */
+.hero{
+  min-height: 100svh;
+  padding: var(--pad);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  border-top: none;
+}
+
+.hero-top{
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--steel);
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--line);
+}
+
+.hero-title{
+  font-family: var(--display);
+  font-weight: 800;
+  font-size: clamp(2.3rem, 1rem + 6.2vw, 6rem);
+  line-height: 0.94;
+  letter-spacing: -0.035em;
+  text-transform: uppercase;
+  margin: clamp(2rem, 6vh, 4rem) 0 0;
+  max-width: 16ch;
+}
+.hero-title em{
+  display: block;
+  font-family: var(--body);
+  font-style: italic;
+  font-weight: 300;
+  text-transform: none;
+  letter-spacing: -0.01em;
+  color: var(--steel);
+}
+
+.hero-bottom{
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 2rem;
+  flex-wrap: wrap;
+  padding-top: 2rem;
+}
+
+.hero-premise{
+  max-width: 46ch;
+  font-size: clamp(1.05rem, 0.9rem + 0.5vw, 1.35rem);
+  margin: 0;
+}
+.hero-premise strong{ font-weight: 500; }
+
+/* 스크롤 유도 */
+.scroll-cue{
+  font-family: var(--mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--steel);
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  white-space: nowrap;
+}
+.scroll-cue span.bar{
+  display: block;
+  width: 46px;
+  height: 1px;
+  background: var(--steel);
+  transform-origin: left;
+  animation: sweep 2.4s ease-in-out infinite;
+}
+@keyframes sweep{
+  0%,100%{ transform: scaleX(0.35); opacity: 0.4; }
+  50%    { transform: scaleX(1);    opacity: 1;   }
+}
+
+/* =========================================================
+   4. THE FILM — 좌: 텍스트 / 우: 사양표
+   ========================================================= */
+.split{
+  display: grid;
+  grid-template-columns: 1.25fr 1fr;
+  gap: clamp(2rem, 5vw, 5rem);
+  align-items: start;
+}
+
+.spec{
+  border: 1px solid var(--ink);
+  background: var(--paper-2);
+  font-family: var(--mono);
+  font-size: 0.78rem;
+}
+.spec-head{
+  background: var(--ink);
+  color: var(--paper);
+  padding: 0.7rem 1rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  font-size: 0.66rem;
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+}
+.spec-row{
+  display: flex;
+  justify-content: space-between;
+  gap: 1.5rem;
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid var(--line);
+}
+.spec-row:last-child{ border-bottom: none; }
+.spec-row dt{
+  color: var(--steel);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-size: 0.64rem;
+  margin: 0;
+  padding-top: 0.15em;
+}
+.spec-row dd{
+  margin: 0;
+  text-align: right;
+  font-weight: 500;
+}
+.spec-note{
+  padding: 0.9rem 1rem;
+  border-top: 1px solid var(--ink);
+  color: var(--steel);
+  font-size: 0.66rem;
+  line-height: 1.6;
+}
+
+/* =========================================================
+   5. THE FRAMEWORK — 테트라드 다이어그램 (핵심 시각 요소)
+   ========================================================= */
+.framework-intro{ text-align: center; margin: 0 auto 3.5rem; }
+.framework-intro p{ margin-left: auto; margin-right: auto; }
+
+.tetrad{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  max-width: 760px;
+  margin: 0 auto;
+  border: 1px solid var(--ink);
+  background: var(--ink);
+  gap: 1px;
+}
+
+.quad{
+  background: var(--paper);
+  padding: clamp(1.4rem, 3vw, 2.4rem);
+  min-height: 200px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 1.2rem;
+  transition: background 0.35s ease;
+}
+.quad:hover{ background: var(--paper-2); }
+
+.quad-label{
+  font-family: var(--mono);
+  font-size: 0.64rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--steel);
+}
+.quad-name{
+  font-family: var(--display);
+  font-weight: 700;
+  font-size: clamp(1.3rem, 0.9rem + 1.4vw, 2rem);
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+  line-height: 1;
+  margin: 0;
+}
+.quad-gloss{
+  font-size: 0.95rem;
+  line-height: 1.5;
+  color: var(--steel);
+  margin: 0;
+  max-width: none;
+}
+
+/* 네 번째 사분면 — 답이 없는 칸 */
+.quad.unanswered{
+  background: var(--pine);
+  color: var(--paper);
+}
+.quad.unanswered:hover{ background: #1B2E27; }
+.quad.unanswered .quad-label{ color: var(--amber); }
+.quad.unanswered .quad-gloss{ color: rgba(231,232,226,0.72); }
+.quad.unanswered .quad-name{
+  display: flex;
+  align-items: baseline;
+  gap: 0.4em;
+}
+.quad.unanswered .mark{
+  color: var(--amber);
+  font-size: 1.3em;
+  animation: blink 2.6s steps(1) infinite;
+}
+@keyframes blink{
+  0%, 62%{ opacity: 1; }
+  63%, 74%{ opacity: 0.15; }
+  75%, 100%{ opacity: 1; }
+}
+
+.tetrad-caption{
+  font-family: var(--mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--steel);
+  text-align: center;
+  margin: 1.2rem auto 0;
+  max-width: 760px;
+}
+
+/* =========================================================
+   6. THESIS — 배경 반전 블록
+   ========================================================= */
+.thesis{
+  background: var(--pine);
+  color: var(--paper);
+  border-top: none;
+  padding-top: clamp(6rem, 14vh, 11rem);
+  padding-bottom: clamp(6rem, 14vh, 11rem);
+}
+.thesis .eyebrow{ color: var(--amber); }
+.thesis .eyebrow::after{ background: rgba(224,163,43,0.35); }
+.thesis .eyebrow .tag{ color: var(--amber); border-color: rgba(224,163,43,0.5); }
+
+.thesis-text{
+  font-family: var(--display);
+  font-weight: 600;
+  font-size: clamp(1.5rem, 0.9rem + 2.4vw, 3rem);
+  line-height: 1.22;
+  letter-spacing: -0.02em;
+  max-width: 24ch;
+  margin: 0;
+}
+.thesis-text .hl{ color: var(--amber); }
+
+/* =========================================================
+   7. 인용구
+   ========================================================= */
+.pull{
+  border-left: 2px solid var(--amber);
+  padding: 0.4rem 0 0.4rem 1.6rem;
+  margin: 2.5rem 0;
+  font-style: italic;
+  font-size: clamp(1.1rem, 0.95rem + 0.6vw, 1.4rem);
+  line-height: 1.45;
+  max-width: 46ch;
+}
+.pull cite{
+  display: block;
+  margin-top: 0.9rem;
+  font-family: var(--mono);
+  font-style: normal;
+  font-size: 0.66rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--steel);
+}
+
+/* 큰 blockquote — 러미지 대사 (시각적 앵커) */
+.anchor-quote{
+  margin: clamp(2.5rem, 6vh, 4.5rem) 0;
+  padding: clamp(2rem, 5vw, 3.5rem) 0;
+  border-top: 1px solid var(--ink);
+  border-bottom: 1px solid var(--ink);
+}
+.anchor-quote blockquote{
+  margin: 0;
+  font-family: var(--display);
+  font-weight: 700;
+  font-size: clamp(1.6rem, 0.9rem + 3.4vw, 4rem);
+  line-height: 1.04;
+  letter-spacing: -0.03em;
+  text-transform: uppercase;
+  max-width: 18ch;
+}
+.anchor-quote blockquote .hl{ color: var(--amber); }
+.anchor-quote cite{
+  display: block;
+  margin-top: 1.4rem;
+  font-family: var(--mono);
+  font-style: normal;
+  font-size: 0.68rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--steel);
+}
+
+/* =========================================================
+   8. THE ENDING — 2단 대비
+   ========================================================= */
+.ending{ padding-bottom: 0; }
+
+.contrast{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  margin-top: 3rem;
+  border: 1px solid var(--ink);
+}
+
+.col{ padding: clamp(1.6rem, 3.5vw, 2.8rem); }
+.col-seen{ background: var(--paper-2); }
+.col-real{
+  background: var(--pine);
+  color: var(--paper);
+  border-left: 1px solid var(--ink);
+}
+
+.col-head{
+  font-family: var(--mono);
+  font-size: 0.66rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  padding-bottom: 0.9rem;
+  margin-bottom: 1.8rem;
+  border-bottom: 1px solid var(--line);
+  color: var(--steel);
+}
+.col-real .col-head{
+  color: var(--amber);
+  border-bottom-color: rgba(224,163,43,0.35);
+}
+
+.col ul{ list-style: none; margin: 0; padding: 0; }
+.col li{
+  padding: 1.1rem 0;
+  border-bottom: 1px dotted var(--line);
+  font-size: 1.02rem;
+  line-height: 1.45;
+}
+.col li:last-child{ border-bottom: none; }
+.col-seen li{ font-style: italic; }
+.col-real li{
+  font-family: var(--mono);
+  font-style: normal;
+  font-size: 0.84rem;
+  line-height: 1.55;
+  border-bottom-color: rgba(231,232,226,0.18);
+}
+
+.ending-after{ margin-top: 3rem; }
+
+/* =========================================================
+   9. CONCLUSION & REFERENCES
+   ========================================================= */
+.conclusion .h2{ max-width: 24ch; }
+
+.refs{
+  background: var(--ink);
+  color: var(--paper);
+  padding: clamp(3.5rem, 8vh, 6rem) var(--pad);
+  font-family: var(--mono);
+  font-size: 0.78rem;
+  line-height: 1.8;
+}
+.refs .eyebrow{ color: rgba(231,232,226,0.55); }
+.refs .eyebrow::after{ background: rgba(231,232,226,0.2); }
+.refs .eyebrow .tag{ color: var(--paper); border-color: rgba(231,232,226,0.3); }
+
+.ref-list{ margin: 0 0 2.5rem; padding: 0; list-style: none; }
+.ref-list li{
+  padding-left: 2.4em;
+  text-indent: -2.4em;
+  margin-bottom: 1rem;
+  max-width: 70ch;
+}
+.ref-note{
+  border-top: 1px solid rgba(231,232,226,0.2);
+  padding-top: 1.5rem;
+  color: rgba(231,232,226,0.6);
+  font-size: 0.72rem;
+  max-width: 70ch;
+}
+.colophon{
+  margin-top: 2rem;
+  font-size: 0.66rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(231,232,226,0.4);
+}
+
+/* =========================================================
+   10. 시그니처: 화면 좌하단 미니 테트라드 (스크롤 위치 표시)
+   ========================================================= */
+.tracker{
+  position: fixed;
+  left: 1.6rem;
+  bottom: 1.6rem;
+  z-index: 50;
+  display: grid;
+  grid-template-columns: 12px 12px;
+  gap: 2px;
+  padding: 8px;
+  background: rgba(231,232,226,0.85);
+  border: 1px solid var(--line);
+  backdrop-filter: blur(6px);
+  opacity: 0;
+  transform: translateY(8px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+  pointer-events: none;
+}
+.tracker.show{ opacity: 1; transform: translateY(0); }
+.tracker i{
+  display: block;
+  width: 12px;
+  height: 12px;
+  background: transparent;
+  border: 1px solid var(--steel);
+  transition: background 0.3s ease, border-color 0.3s ease;
+}
+.tracker i.on{ background: var(--amber); border-color: var(--amber); }
+
+/* =========================================================
+   11. 스크롤 등장 애니메이션
+   ========================================================= */
+.reveal{
+  opacity: 0;
+  transform: translateY(22px);
+  transition: opacity 0.8s ease, transform 0.8s cubic-bezier(.2,.7,.3,1);
+}
+.reveal.in{ opacity: 1; transform: none; }
+.reveal.d1{ transition-delay: 0.12s; }
+.reveal.d2{ transition-delay: 0.26s; }
+
+/* 접근성: 포커스 표시 */
+a:focus-visible{
+  outline: 2px solid var(--amber);
+  outline-offset: 3px;
+}
+
+/* =========================================================
+   12. 반응형 (모바일)
+   ========================================================= */
+@media (max-width: 860px){
+  .split{ grid-template-columns: 1fr; }
+  .tetrad{ grid-template-columns: 1fr; }
+  .contrast{ grid-template-columns: 1fr; }
+  .col-real{ border-left: none; border-top: 1px solid var(--ink); }
+  .hero-bottom{ flex-direction: column; align-items: flex-start; }
+  .tracker{ display: none; }
+  .anchor-quote blockquote{ max-width: none; }
+}
+
+/* 모션 최소화 설정 존중 */
+@media (prefers-reduced-motion: reduce){
+  html{ scroll-behavior: auto; }
+  .reveal{ opacity: 1; transform: none; transition: none; }
+  .scroll-cue span.bar, .quad.unanswered .mark{ animation: none; }
+}
+</style>
+</head>
+
+<body>
+
+<!-- ===== 시그니처: 미니 테트라드 트래커 ===== -->
+<div class="tracker" id="tracker" aria-hidden="true">
+  <i data-q="enhance"></i>
+  <i data-q="obsolesce"></i>
+  <i data-q="retrieve"></i>
+  <i data-q="reverse"></i>
+</div>
+
+
+<!-- =========================================================
+     1. HERO
+     ========================================================= -->
+<header class="hero">
+  <div class="hero-top">
+    <span>Rozzum Unit 7134 · Field Analysis</span>
+    <span>ATCM 2300 · Final Essay</span>
+  </div>
+
+  <h1 class="hero-title">
+    McLuhan's Tetrad and the Limits of Technological Optimism
+    <em>in The Wild Robot</em>
+  </h1>
+
+  <div class="hero-bottom">
+    <p class="hero-premise">
+      Technology and nature are supposed to be opposites — the machine intrudes, the forest
+      suffers. <strong>The Wild Robot argues otherwise.</strong> This reading asks what that
+      argument quietly leaves out.
+    </p>
+    <a class="scroll-cue" href="#film">
+      <span class="bar"></span> Begin reading
+    </a>
+  </div>
+</header>
+
+
+<!-- =========================================================
+     2. THE FILM
+     ========================================================= -->
+<section class="section" id="film" data-quad="none">
+  <div class="wrap">
+    <p class="eyebrow"><span class="tag">§ 01</span> The film</p>
+
+    <div class="split">
+      <div class="reveal">
+        <h2 class="h2">A service robot with no one left to serve</h2>
+        <p>
+          Roz is a Rozzum unit: a universal service robot built to receive a task and complete it.
+          A cargo ship accident strands her on an uninhabited island where no customer exists.
+          She survives by listening — gathering the fragmented sounds of the animals around her
+          until she can parse them into a language both sides share. Translation becomes the
+          task she was never assigned.
+        </p>
+      </div>
+
+      <dl class="spec reveal d1">
+        <div class="spec-head">
+          <span>Unit record</span>
+          <span>UD / 7134</span>
+        </div>
+        <div class="spec-row"><dt>Title</dt><dd>The Wild Robot</dd></div>
+        <div class="spec-row"><dt>Director</dt><dd>Chris Sanders</dd></div>
+        <div class="spec-row"><dt>Studio</dt><dd>DreamWorks Animation</dd></div>
+        <div class="spec-row"><dt>Year</dt><dd>2024</dd></div>
+        <div class="spec-row"><dt>Manufacturer</dt><dd>Universal Dynamics</dd></div>
+        <div class="spec-row"><dt>Assigned task</dt><dd>None received</dd></div>
+        <div class="spec-row"><dt>Adopted task</dt><dd>Raise Brightbill</dd></div>
+        <div class="spec-note">
+          No stills are reproduced on this page. Every frame described here belongs to
+          DreamWorks Animation; the argument is built from text alone.
+        </div>
+      </dl>
+    </div>
+  </div>
+</section>
+
+
+<!-- =========================================================
+     3. THE FRAMEWORK — 테트라드 다이어그램
+     ========================================================= -->
+<section class="section" id="framework" data-quad="none">
+  <div class="wrap">
+    <p class="eyebrow"><span class="tag">§ 02</span> The framework</p>
+
+    <div class="framework-intro reveal">
+      <h2 class="h2" style="max-width:22ch;margin-inline:auto;">Four questions to ask any medium</h2>
+      <p style="text-align:center;">
+        McLuhan's tetrad asks what a technology enhances, what it makes obsolete, what it
+        retrieves, and what it reverses into once pushed to its limit. The Wild Robot answers
+        three of them generously. The fourth it leaves open.
+      </p>
+    </div>
+
+    <div class="tetrad reveal d1">
+      <div class="quad">
+        <span class="quad-label">Answered</span>
+        <h3 class="quad-name">Enhance</h3>
+        <p class="quad-gloss">Roz translates. Species that could only react to each other can now be understood.</p>
+      </div>
+
+      <div class="quad">
+        <span class="quad-label">Answered</span>
+        <h3 class="quad-name">Obsolesce</h3>
+        <p class="quad-gloss">Instinct alone stops being the only basis for survival on the island.</p>
+      </div>
+
+      <div class="quad">
+        <span class="quad-label">Answered</span>
+        <h3 class="quad-name">Retrieve</h3>
+        <p class="quad-gloss">An older ethos of coexistence and solidarity returns to the wild.</p>
+      </div>
+
+      <div class="quad unanswered">
+        <span class="quad-label">Unanswered</span>
+        <h3 class="quad-name">Reverse <span class="mark">?</span></h3>
+        <p class="quad-gloss">What the mediation flips into when it reaches its limit. The film changes the subject.</p>
+      </div>
+    </div>
+
+    <p class="tetrad-caption">Framework after Balsamo (2022) · Applied to Roz as medium</p>
+  </div>
+</section>
+
+
+<!-- =========================================================
+     4. THESIS — 반전 블록
+     ========================================================= -->
+<section class="section thesis" id="thesis" data-quad="none">
+  <div class="wrap">
+    <p class="eyebrow"><span class="tag">§ 03</span> Thesis</p>
+    <p class="thesis-text">
+      The Wild Robot is generous about enhancement and retrieval, and
+      <span class="hl">silent about reversal</span> — a machine that inverts its own purpose,
+      an ecosystem left dependent on corporate debris, and an understanding that was only ever
+      the mediator's version of it.
+    </p>
+  </div>
+</section>
+
+
+<!-- =========================================================
+     5. ENHANCEMENT & RETRIEVAL
+     ========================================================= -->
+<section class="section" id="enhancement" data-quad="enhance retrieve">
+  <div class="wrap">
+    <p class="eyebrow"><span class="tag">§ 04</span> Enhancement &amp; Retrieval</p>
+
+    <div class="split">
+      <div class="reveal">
+        <h2 class="h2">Peace, on the mediator's terms</h2>
+        <p>
+          Roz does not invent a new way for animals to speak to one another. She makes herself
+          legible to them, and in doing so installs an external machine at the centre of the
+          ecosystem. Everything now passes through her.
+        </p>
+        <p>
+          In the winter cabin she declares a No-Kill Rule, and predators sleep beside prey.
+          Solidarity — long buried under the brutal arithmetic of the wild — is retrieved. But
+          it is retrieved as an ordinance, not as an instinct. The truce holds because the cold
+          is severe and because Roz is physically present to enforce it.
+        </p>
+      </div>
+
+      <div class="reveal d1">
+        <blockquote class="pull">
+          "Sometimes, to survive, we must become more than we were programmed to be."
+          <cite>Roz · Winter cabin</cite>
+        </blockquote>
+        <p style="font-size:0.95rem;color:var(--steel);">
+          A line the film offers as growth. Read against the tetrad, it is also the first
+          notice that the unit has begun overriding itself.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- =========================================================
+     6. REVERSAL ① — THE MACHINE
+     ========================================================= -->
+<section class="section" id="reversal-one" data-quad="reverse">
+  <div class="wrap">
+    <p class="eyebrow"><span class="tag">§ 05</span> Reversal ① · The machine</p>
+
+    <div class="reveal">
+      <h2 class="h2">A task robot breaking its code to finish a task</h2>
+      <p>
+        Every medium, McLuhan argues, flips into its opposite once pushed far enough. Roz was
+        built to receive directives from customers. To raise Brightbill she repeatedly overrides
+        her own core system — not by abandoning the logic of the directive, but by serving one
+        she assigned herself.
+      </p>
+    </div>
+
+    <div class="anchor-quote reveal d1">
+      <blockquote>
+        You are in the <span class="hl">wrong place</span>, and you have become the
+        <span class="hl">wrong thing</span>.
+      </blockquote>
+      <cite>Rummage · Salvaged Rozzum unit</cite>
+    </div>
+
+    <p class="reveal d2">
+      Rummage means it as a fault report. It is also an accurate diagnosis: the obedience that
+      defined the unit is now the mechanism producing its disobedience. That is reversal in its
+      textbook form.
+    </p>
+  </div>
+</section>
+
+
+<!-- =========================================================
+     7. REVERSAL ② — GATEKEEPING
+     ========================================================= -->
+<section class="section" id="reversal-two" data-quad="reverse">
+  <div class="wrap">
+    <p class="eyebrow"><span class="tag">§ 06</span> Reversal ② · Gatekeeping</p>
+
+    <div class="split">
+      <div class="reveal">
+        <h2 class="h2">Translation is not the same as understanding</h2>
+        <p>
+          Brightbill learns what happened to his family — and that Roz knew. She defends the
+          silence by saying the truth would not have helped him. He answers that the decision
+          was never hers to make.
+        </p>
+        <p>
+          The exchange exposes what sits underneath every act of mediation: someone decides what
+          gets carried across and what does not. A shared language did not produce mutual
+          understanding. It produced a version of understanding shaped by whoever holds the
+          channel.
+        </p>
+      </div>
+
+      <div class="reveal d1">
+        <blockquote class="pull">
+          "How smart does your bed have to be, before you are afraid to go to sleep at night?"
+          <cite>Rich Gold, as cited in Balsamo (2022)</cite>
+        </blockquote>
+        <p style="font-size:0.95rem;color:var(--steel);">
+          When Roz decides to leave, Fink and Brightbill protest and lose. The mediator sets the
+          ecological future of the island; the animals receive it. Goodwill is the form the
+          asymmetry takes, not its absence.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- =========================================================
+     8. THE ENDING — 2단 대비 (가장 강조되는 섹션)
+     ========================================================= -->
+<section class="section ending" id="ending" data-quad="reverse">
+  <div class="wrap">
+    <p class="eyebrow"><span class="tag">§ 07</span> The ending</p>
+
+    <div class="reveal">
+      <h2 class="h2">A bedtime story assembled from corporate ruins</h2>
+      <p>
+        After Roz departs, Fink reads the Rozzum user manual aloud to young animals as a bedtime
+        story, while the children gather around a discarded robot head to watch Universal
+        Dynamics promotional footage. The film stages this as a community that has come into its
+        own.
+      </p>
+    </div>
+
+    <div class="contrast">
+      <div class="col col-seen reveal">
+        <p class="col-head">What the animals see</p>
+        <ul>
+          <li>The myth of a hero who came from the sky and chose to stay.</li>
+          <li>A warm nightly gathering around a glowing screen.</li>
+          <li>A culture of their own, told in their own voices.</li>
+        </ul>
+      </div>
+
+      <div class="col col-real reveal d2">
+        <p class="col-head">What it actually is</p>
+        <ul>
+          <li>UD product documentation. Operating instructions, read as scripture.</li>
+          <li>Marketing footage, playing from a severed unit's head.</li>
+          <li>Inherited technological debris, mistaken for inheritance.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="ending-after reveal">
+      <p>
+        The film does not treat this as irony. It lights the scene warmly and moves on. That
+        choice is not a mistake — it is the pattern by which new technology is absorbed:
+        dependency and irreversibility deferred behind a story comforting enough that nobody
+        asks what the story is made of.
+      </p>
+    </div>
+  </div>
+</section>
+
+
+<!-- =========================================================
+     9. CONCLUSION
+     ========================================================= -->
+<section class="section conclusion" id="conclusion" data-quad="reverse">
+  <div class="wrap">
+    <p class="eyebrow"><span class="tag">§ 08</span> Conclusion</p>
+
+    <div class="reveal">
+      <h2 class="h2">Reversal applies to the story too</h2>
+      <p>
+        Balsamo reads the tetrad not only as an instrument for analysing media that already
+        exist, but as training for imagining the technological futures we may end up living in.
+        If that is right, reversal governs our narratives as much as our machines. Push
+        technological optimism to its limit and it inverts into narrative evasion — romanticising
+        the exact dependency it was supposed to examine.
+      </p>
+    </div>
+  </div>
+</section>
+
+
+<!-- =========================================================
+     10. REFERENCES (footer)
+     ========================================================= -->
+<footer class="refs" id="references">
+  <div class="wrap">
+    <p class="eyebrow"><span class="tag">§ 09</span> References</p>
+
+    <ul class="ref-list">
+      <li>Balsamo, A. (2022). <em>Introduction to technoculture</em> (2nd ed.). Kendall Hunt.</li>
+      <li>Sanders, C. (Director). (2024). <em>The wild robot</em> [Film]. DreamWorks Animation.</li>
+    </ul>
+
+    <p class="ref-note">
+      Image credits: none. No stills or frames from The Wild Robot are reproduced on this page.
+      All scenes are described in text; the film and its imagery remain the property of
+      DreamWorks Animation.
+    </p>
+
+    <p class="colophon">
+      Do Heon Kim (Rick) · Professor Kasif Rahman · ATCM 2300 · 10 August 2026
+    </p>
+  </div>
+</footer>
+
+
+<script>
+/* =========================================================
+   JS 1 — 스크롤하면 요소가 나타나는 효과
+   IntersectionObserver: 요소가 화면에 들어왔는지 감시하는 브라우저 기능
+   ========================================================= */
+const revealItems = document.querySelectorAll('.reveal');
+
+const revealObserver = new IntersectionObserver((entries) => {
+  entries.forEach((entry) => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('in');   // CSS의 .in 규칙이 적용됨
+      revealObserver.unobserve(entry.target); // 한 번만 실행
+    }
+  });
+}, { threshold: 0.15 });
+
+revealItems.forEach((el) => revealObserver.observe(el));
+
+
+/* =========================================================
+   JS 2 — 좌하단 미니 테트라드 트래커
+   현재 보고 있는 섹션이 어느 사분면에 해당하는지 표시
+   ========================================================= */
+const tracker = document.getElementById('tracker');
+const cells = tracker.querySelectorAll('i');
+const sections = document.querySelectorAll('.section');
+
+function setQuadrants(value) {
+  const active = value.split(' ');   // 예: "enhance retrieve" → ['enhance','retrieve']
+  cells.forEach((cell) => {
+    cell.classList.toggle('on', active.includes(cell.dataset.q));
+  });
+}
+
+const quadObserver = new IntersectionObserver((entries) => {
+  entries.forEach((entry) => {
+    if (entry.isIntersecting) {
+      setQuadrants(entry.target.dataset.quad || 'none');
+    }
+  });
+}, { rootMargin: '-45% 0px -45% 0px' });   // 화면 정중앙에 걸린 섹션만 감지
+
+sections.forEach((s) => quadObserver.observe(s));
+
+/* 히어로를 지나면 트래커를 보여줌 */
+const heroEl = document.querySelector('.hero');
+const heroObserver = new IntersectionObserver((entries) => {
+  entries.forEach((entry) => {
+    tracker.classList.toggle('show', !entry.isIntersecting);
+  });
+}, { threshold: 0 });
+
+heroObserver.observe(heroEl);
+</script>
+
+</body>
+</html>
