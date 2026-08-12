@@ -1273,11 +1273,19 @@ heroObserver.observe(heroEl);
 
 
 /* =========================================================
-   JS 3 — 이미지 파일이 아직 없을 때 깨진 아이콘 대신 자리표시 보여주기
-   onerror: 이미지 로딩에 실패했을 때 실행되는 이벤트
+   JS 3 — 이미지 경로 자동 보정
+   images/ 폴더에 없으면 같은 폴더(루트)에서 다시 찾아보고,
+   그래도 없으면 깨진 아이콘 대신 자리표시를 보여줌
    ========================================================= */
 document.querySelectorAll('.figure img').forEach((img) => {
   img.addEventListener('error', () => {
+    const fileName = img.getAttribute('src').split('/').pop();  // 'winter-cabin.jpg'
+
+    if (!img.dataset.retried) {
+      img.dataset.retried = 'yes';   // 재시도는 한 번만 (무한 루프 방지)
+      img.src = fileName;            // images/ 를 떼고 루트에서 다시 시도
+      return;
+    }
     img.closest('.figure').classList.add('missing');
   });
 });
