@@ -504,6 +504,8 @@ p{ margin: 0 0 1.2em; max-width: 62ch; }
   text-transform: uppercase;
   color: rgba(231,232,226,0.4);
 }
+/* 각 항목은 통째로만 줄바꿈 — ATCM 2300 처럼 붙어야 할 단어가 갈라지지 않게 */
+.colophon span{ white-space: nowrap; }
 
 /* =========================================================
    10. 시그니처: 화면 좌하단 미니 테트라드 (스크롤 위치 표시)
@@ -1211,7 +1213,10 @@ a:focus-visible{
     </p>
 
     <p class="colophon">
-      Do Heon Kim (Rick) · Professor Kasif Rahman · ATCM 2300 · 10 August 2026
+      <span>Do Heon Kim (Rick)</span> ·
+      <span>Professor Kasif Rahman</span> ·
+      <span>ATCM 2300</span> ·
+      <span>10 August 2026</span>
     </p>
   </div>
 </footer>
